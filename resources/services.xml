@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This file was auto-generated from WSDL -->
+<!-- by the Apache Axis2 version: 1.5.6  Built on : Aug 30, 2011 (10:00:16 CEST) -->
+<serviceGroup>
+    <service name="LdapHelper">
+        <messageReceivers>
+            <messageReceiver mep="http://www.w3.org/ns/wsdl/in-out" class="com.intalio.innovelocity.ldaphelper.LdapHelperMessageReceiverInOut"/>
+        </messageReceivers>
+        <parameter name="ServiceClass">com.intalio.innovelocity.ldaphelper.LdapHelperSkeleton</parameter>
+        <parameter name="useOriginalwsdl">true</parameter>
+        <parameter name="modifyUserWSDLPortAddress">true</parameter>
+        <operation name="Update" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://innovelocity.intalio.com/LdapHelper/">
+            <actionMapping>http://innovelocity.intalio.com/LdapHelper/Update</actionMapping>
+            <outputActionMapping>http://innovelocity.intalio.com/LdapHelper/LdapHelper/UpdateResponse</outputActionMapping>
+        </operation>
+        <operation name="Query" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://innovelocity.intalio.com/LdapHelper/">
+            <actionMapping>http://innovelocity.intalio.com/LdapHelper/Query</actionMapping>
+            <outputActionMapping>http://innovelocity.intalio.com/LdapHelper/LdapHelper/QueryResponse</outputActionMapping>
+        </operation>
+    </service>
+</serviceGroup>
