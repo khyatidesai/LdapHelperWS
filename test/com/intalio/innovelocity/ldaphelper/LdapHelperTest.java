@@ -1,7 +1,7 @@
-package com.intalio.innovelocity.ldaphelper;
+package org.intalio.ldaphelper;
 
 import junit.framework.*;
-import com.intalio.innovelocity.ldaphelper.*;
+import org.intalio.ldaphelper.*;
 
 public class LdapHelperTest extends TestCase{
     public  void testquery1() throws java.lang.Exception{
