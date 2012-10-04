@@ -30,9 +30,14 @@ public class LdapHelperSkeleton{
     private String prop_searchBase;
 
     private void loadProps() throws IOException{
+    	System.out.println("Enetering load Props");
+    	
         String filename = "ldapquery.properties";
         Properties props = new Properties();
         InputStream isr = this.getClass().getResourceAsStream("/"+filename);
+        
+        System.out.println("ISR Available : "  + isr);
+        
         if (isr != null){
             InputStreamReader isrProperties = new InputStreamReader(isr);
             if(isrProperties!= null){

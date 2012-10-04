@@ -13,7 +13,7 @@ require File.join(File.dirname(__FILE__), "dependencies.rb")
 VERSION_NUMBER = "1.0.0.0-SNAPSHOT"
  
 
-define "ldap-ws" do  
+define "ldap-helper-ws" do  
   project.version = VERSION_NUMBER
   project.group = "org.intalio.ldaphelper"
   compile.options.source = "1.5"
@@ -21,7 +21,7 @@ define "ldap-ws" do
   libs = AXIS2, APACHE_COMMONS[:httpclient], APACHE_COMMONS[:lang], APACHE_COMMONS[:codec], LOG4J, SLF4J, XMLBEANS, AXIOM, STAX_API, WSDL4J, WS_COMMONS_SCHEMA, HTTP_CORE
  
   compile.from('src').with libs
-  package(:aar)
+  package(:aar).include(path_to("src/org/intalio/ldaphelper/*")).include("resources/ldapquery.properties")
 
 end
 

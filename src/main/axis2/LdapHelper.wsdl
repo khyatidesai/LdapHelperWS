@@ -20,16 +20,7 @@
       		</xsd:sequence>
       	</xsd:complexType>
       </xsd:element>
-      
-    
-    
-    
-        
-    
-    
-    
-        
-      <xsd:complexType name="Item">
+       <xsd:complexType name="Item">
       	<xsd:sequence>
       		<xsd:element maxOccurs="1" minOccurs="1" name="Key" type="xsd:string"/>
       		<xsd:element maxOccurs="unbounded" minOccurs="0" name="Value" type="xsd:string"/>
