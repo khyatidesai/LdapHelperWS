@@ -61,9 +61,11 @@ public class LdapHelperSkeleton {
 				prop_providerUrl = props.getProperty("url");
 				System.out.println("prop_providerUrl : " + prop_providerUrl);
 				prop_securityPrincipal = props.getProperty("principal");
-				System.out.println("prop_securityPrincipal : " + prop_securityPrincipal);
+				System.out.println("prop_securityPrincipal : "
+						+ prop_securityPrincipal);
 				prop_securityCredentials = props.getProperty("credentials");
-				System.out.println("prop_securityCredentials : " + prop_securityCredentials);
+				System.out.println("prop_securityCredentials : "
+						+ prop_securityCredentials);
 				prop_searchBase = props.getProperty("search_base");
 				System.out.println("prop_searchBase : " + prop_searchBase);
 			}// else{
