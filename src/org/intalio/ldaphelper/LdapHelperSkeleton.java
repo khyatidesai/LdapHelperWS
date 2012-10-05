@@ -49,25 +49,20 @@ public class LdapHelperSkeleton {
 
 		File cfgFile = new File(System.getProperty(CONFIG_DIR) + File.separator
 				+ CONFIG_FILE_NAME);
-		System.out.println("Filename : " + cfgFile);
 		FileInputStream fis = null;
 
 		try {
 			fis = new FileInputStream(cfgFile);
 			Properties props = new Properties();
-			System.out.println("FIS : " + fis);
 			if (fis != null) {
 				props.load(fis);
 				prop_providerUrl = props.getProperty("url");
-				System.out.println("prop_providerUrl : " + prop_providerUrl);
+		
 				prop_securityPrincipal = props.getProperty("principal");
-				System.out.println("prop_securityPrincipal : "
-						+ prop_securityPrincipal);
-				prop_securityCredentials = props.getProperty("credentials");
-				System.out.println("prop_securityCredentials : "
-						+ prop_securityCredentials);
+						prop_securityCredentials = props.getProperty("credentials");
+		
 				prop_searchBase = props.getProperty("search_base");
-				System.out.println("prop_searchBase : " + prop_searchBase);
+		
 			}// else{
 				// prop_providerUrl = "ldap://localhost:10389/";
 				// prop_securityPrincipal = "uid=admin,ou=system";
