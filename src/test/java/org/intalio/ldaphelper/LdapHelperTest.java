@@ -12,7 +12,7 @@ public class LdapHelperTest extends TestCase{
     
     public void testquery1() throws java.lang.Exception {
         
-        LdapHelperSkeleton  stub = new LdapHelperSkeleton();      
+        LdapHelperSkeletonTest  stub = new LdapHelperSkeletonTest();      
         Query query = (Query) getTestObject(Query.class);
               
         Item[] items = new Item[1];
@@ -26,7 +26,7 @@ public class LdapHelperTest extends TestCase{
 
         query.setParameters(items);
         query.setReturns(returns);
-        query.setSearchBase("ou=Roles, dc=examples, dc=com");
+        query.setSearchBase("ou=People, dc=examples, dc=com");
 
         QueryResponse response = stub.query(query);
         System.out.println(response);
@@ -34,7 +34,8 @@ public class LdapHelperTest extends TestCase{
     }
 
     public void testquery2() throws java.lang.Exception {
-        LdapHelperSkeleton stub = new LdapHelperSkeleton();
+        
+        LdapHelperSkeletonTest  stub = new LdapHelperSkeletonTest();   
         Query query = (Query) getTestObject(Query.class);
         Item[] items = new Item[1];
         items[0] = new Item();
@@ -44,7 +45,8 @@ public class LdapHelperTest extends TestCase{
         items[0].setValue(values);
 
         String[] returns = { "cn", "mail", "displayName", "manager" };
-
+        
+        query.setSearchBase("ou=People, dc=examples, dc=com");
         query.setParameters(items);
         query.setReturns(returns);
 
@@ -52,26 +54,36 @@ public class LdapHelperTest extends TestCase{
         printResponse(response.getResults());
     }
 
+    
     public void testupdate() throws java.lang.Exception {
-        LdapHelperSkeleton stub = new LdapHelperSkeleton();
+        
+        LdapHelperSkeletonTest  stub = new LdapHelperSkeletonTest();   
         Update update = (Update) getTestObject(Update.class);
         update.setName("cn=bjones, ou=People, dc=examples, dc=com");
+        
         Operation op = new Operation();
-        op.setAction(OperationAction.REMOVE);
         Item item = new Item();
         item.setKey("mail");
         op.setItem(item);
+        op.setAction(OperationAction.ADD);
+        item.setValue(new String[] { "khyati@intalio.com" });
         update.setOperation(op);
         UpdateResponse response = stub.update(update);
         printResponse(response.getResults());
-        op.setAction(OperationAction.ADD);
-        item.setValue(new String[] { "felipe2@intalio.com" });
-        response = stub.update(update);
-        printResponse(response.getResults());
+        
         op.setAction(OperationAction.REPLACE);
-        item.setValue(new String[] { "felipe@intalio.com" });
+        item.setValue(new String[] { "khyati@intalio.com" });
+        update.setOperation(op);
         response = stub.update(update);
         printResponse(response.getResults());
+        
+        op.setAction(OperationAction.REMOVE);
+        update.setOperation(op);
+        update.setOperation(op);
+        response = stub.update(update);
+        printResponse(response.getResults());
+       
+      
 
     }
 
