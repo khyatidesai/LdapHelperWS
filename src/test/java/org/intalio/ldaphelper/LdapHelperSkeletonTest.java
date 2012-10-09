@@ -24,9 +24,9 @@ import javax.naming.directory.ModificationItem;
 import org.apache.log4j.Logger;
 
 import com.unboundid.ldap.sdk.Attribute;
+import com.unboundid.ldap.sdk.Entry;
 import com.unboundid.ldap.sdk.LDAPConnection;
 import com.unboundid.ldap.sdk.LDAPException;
-import com.unboundid.ldap.sdk.LDAPResult;
 import com.unboundid.ldap.sdk.LDAPSearchException;
 import com.unboundid.ldap.sdk.SearchResult;
 import com.unboundid.ldap.sdk.SearchResultEntry;
@@ -92,7 +92,7 @@ public class LdapHelperSkeletonTest {
 
         MockLdapServer server = new MockLdapServer();
         mockConnection = server.configureandStartServer();
-        System.out.println(mockConnection);
+        System.out.println("Mock Connection" + mockConnection);
     }
 
     private String sanatize(String input) {
@@ -211,7 +211,7 @@ public class LdapHelperSkeletonTest {
                                 result_item.setItems(result_list.toArray(new Item[0]));
                                 list.add(result_item);
                             }
-                            System.out.println(result_list);
+                            
                             i++;
 
                         }
@@ -230,9 +230,9 @@ public class LdapHelperSkeletonTest {
 
         loadProps();
         connect();
-        String name = update.getName();
+     
 
-        LDAPResult modifyResult = new LDAPResult(0, null);
+   
         UpdateResponse response = new UpdateResponse();
 
         OperationAction action = update.getOperation().getAction();
@@ -244,8 +244,9 @@ public class LdapHelperSkeletonTest {
             if (action == OperationAction.ADD) {
                 mods[0] = new ModificationItem(DirContext.ADD_ATTRIBUTE, new BasicAttribute(item.getKey(),
                         item.getValue()[0]));
-                modifyResult = mockConnection
-                        .add("dn: cn=kdesai,ou=People,dc=examples,dc=com", "objectClass: organizationalPerson", "objectClass: person", "objectClass: inetOrgPerson", "objectClass: top", "cn: khyati", "departmentnumber: 111", "displayname: Khyati Desai", "givenname: Robert", "l: Foster City", "mail: bjones@intalio.org", "manager: cn=bjones,ou=People,dc=examples,dc=com", "ou: People", "roomnumber: 6733", "sn: Jones", "telephonenumber: (650) 555-9987", "title: Director of Customer Service", "uid: examples\bjones", "userpassword:: cGFzc3dvcmQ=");
+                
+                 mockConnection
+                        .add(new Entry(update.getNames()));
             } else {
                 if (action == OperationAction.REMOVE) {
                     mods[0] = new ModificationItem(DirContext.REMOVE_ATTRIBUTE, new BasicAttribute(item.getKey()));
@@ -254,14 +255,14 @@ public class LdapHelperSkeletonTest {
                     if (action == OperationAction.REPLACE) {
                         mods[0] = new ModificationItem(DirContext.REPLACE_ATTRIBUTE, new BasicAttribute(item.getKey(),
                                 item.getValue()[0]));
-                        modifyResult = mockConnection
-                                .modify("dn: cn=msmith,ou=People,dc=examples,dc=com", "changetype: modify", "replace:mail", "mail:marksmith@intalio.com");
+                        mockConnection
+                                .modify((update.getNames()));
                     }
                 }
             }
-            System.out.println(modifyResult.getMatchedDN());
-
-            SearchResultEntry entries = mockConnection.getEntry(prop_searchBase, "mail:khyati@intalio.com");
+            
+            SearchResultEntry entries = mockConnection.getEntry("ou=People, dc=examples, dc=com");
+            System.out.println("Entries : " +  entries);
             Data[] results = new Data[1];
             results[0] = new Data();
 
@@ -287,13 +288,19 @@ public class LdapHelperSkeletonTest {
             results[0].setItems(results_item);
 
             response.setResults(results);
+            System.out.println("Results " + results);
 
-        } catch (LDIFException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
         } catch (LDAPException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
+        } catch (LDIFException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }finally{
+            {
+                mockConnection.close();
+                
+            }
         }
 
         return response;

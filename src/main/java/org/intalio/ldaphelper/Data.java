@@ -7,6 +7,8 @@
 
 package org.intalio.ldaphelper;
 
+import java.util.ArrayList;
+
 /**
  * Data bean class
  */
@@ -24,6 +26,7 @@ public class Data implements org.apache.axis2.databinding.ADBBean {
     private static final long serialVersionUID = 1L;
 
     private static java.lang.String generatePrefix(java.lang.String namespace) {
+     
         if (namespace.equals("http://bpms.intalio.org/LdapHelper/")) {
             return "ns1";
         }

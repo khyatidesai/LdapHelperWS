@@ -18,9 +18,9 @@ define "ldap-helper-ws" do
   project.group = "org.intalio.ldaphelper"
   compile.options.source = "1.5"
   compile.options.target = "1.5"
-  libs = AXIS2, APACHE_COMMONS[:httpclient], APACHE_COMMONS[:lang], APACHE_COMMONS[:codec], LOG4J, SLF4J, XMLBEANS, AXIOM, STAX_API, WSDL4J, WS_COMMONS_SCHEMA, HTTP_CORE
+  libs = AXIS2, APACHE_COMMONS[:httpclient], APACHE_COMMONS[:lang], APACHE_COMMONS[:codec],LOG4J, JUNIT,SLF4J, XMLBEANS, AXIOM, STAX_API, WSDL4J, WS_COMMONS_SCHEMA,UNBOUND_ID,HTTP_CORE
  
-  compile.from('src').with libs
+  compile.with libs
   package(:aar)
 
 end

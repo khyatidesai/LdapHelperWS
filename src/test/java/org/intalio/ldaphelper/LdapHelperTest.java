@@ -1,20 +1,14 @@
 package org.intalio.ldaphelper;
 
-import org.intalio.ldaphelper.Item;
-import org.intalio.ldaphelper.LdapHelperSkeleton;
-import org.intalio.ldaphelper.Query;
-import org.intalio.ldaphelper.QueryResponse;
-
 import junit.framework.TestCase;
 
+public class LdapHelperTest extends TestCase {
 
-public class LdapHelperTest extends TestCase{
-    
     public void testquery1() throws java.lang.Exception {
-        
-        LdapHelperSkeletonTest  stub = new LdapHelperSkeletonTest();      
+
+        LdapHelperSkeletonTest stub = new LdapHelperSkeletonTest();
         Query query = (Query) getTestObject(Query.class);
-              
+
         Item[] items = new Item[1];
         items[0] = new Item();
         items[0].setKey("objectClass");
@@ -34,8 +28,8 @@ public class LdapHelperTest extends TestCase{
     }
 
     public void testquery2() throws java.lang.Exception {
-        
-        LdapHelperSkeletonTest  stub = new LdapHelperSkeletonTest();   
+
+        LdapHelperSkeletonTest stub = new LdapHelperSkeletonTest();
         Query query = (Query) getTestObject(Query.class);
         Item[] items = new Item[1];
         items[0] = new Item();
@@ -45,7 +39,7 @@ public class LdapHelperTest extends TestCase{
         items[0].setValue(values);
 
         String[] returns = { "cn", "mail", "displayName", "manager" };
-        
+
         query.setSearchBase("ou=People, dc=examples, dc=com");
         query.setParameters(items);
         query.setReturns(returns);
@@ -54,13 +48,13 @@ public class LdapHelperTest extends TestCase{
         printResponse(response.getResults());
     }
 
-    
     public void testupdate() throws java.lang.Exception {
-        
-        LdapHelperSkeletonTest  stub = new LdapHelperSkeletonTest();   
+
+        LdapHelperSkeletonTest stub = new LdapHelperSkeletonTest();
         Update update = (Update) getTestObject(Update.class);
-        update.setName("cn=bjones, ou=People, dc=examples, dc=com");
-        
+        String[] addRecord = {"dn: cn=kdesai,ou=People,dc=examples,dc=com", "objectClass: organizationalPerson", "objectClass: person", "objectClass: inetOrgPerson", "objectClass: top", "cn: khyati", "departmentnumber: 111", "displayname: Khyati Desai", "givenname: Robert", "l: Foster City", "mail: bjones@intalio.org", "manager: cn=bjones,ou=People,dc=examples,dc=com", "ou: People", "roomnumber: 6733", "sn: Jones", "telephonenumber: (650) 555-9987", "title: Director of Customer Service", "uid: examples\bjones", "userpassword:: cGFzc3dvcmQ="};
+        update.setNames(addRecord);
+
         Operation op = new Operation();
         Item item = new Item();
         item.setKey("mail");
@@ -70,20 +64,19 @@ public class LdapHelperTest extends TestCase{
         update.setOperation(op);
         UpdateResponse response = stub.update(update);
         printResponse(response.getResults());
-        
+
+        update.setNames(new String[]{"dn: cn=msmith,ou=People,dc=examples,dc=com", "changetype: modify", "replace:mail", "mail:marksmith@intalio.com"});
         op.setAction(OperationAction.REPLACE);
-        item.setValue(new String[] { "khyati@intalio.com" });
+        item.setValue(new String[] { "mail:marksmith@intalio.com" });
         update.setOperation(op);
         response = stub.update(update);
         printResponse(response.getResults());
-        
+
         op.setAction(OperationAction.REMOVE);
         update.setOperation(op);
         update.setOperation(op);
         response = stub.update(update);
         printResponse(response.getResults());
-       
-      
 
     }
 

@@ -28,7 +28,7 @@ DOM4J = "dom4j:dom4j:jar:1.6.1"
 
 JAXEN = "jaxen:jaxen:jar:1.1.1"
 JDOM = "jdom:jdom:jar:1.0"
-JUNIT = "junit:junit:jar:4.4"
+JUNIT = ["junit:junit:jar:4.4"]
 
 LOG4J = "log4j:log4j:jar:1.2.15"
 
@@ -63,3 +63,4 @@ TEMPO = [
 ]
 
 BPMS_COMMON = ["com.intalio.bpms.common:bpms-common:jar:1.0.0.0"]
+UNBOUND_ID =["com.unboundid:unboundid-ldapsdk:jar:2.3.1"]
